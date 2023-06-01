@@ -1,3 +1,7 @@
+# exclude git and terraform lock
+.git
+.terraform.lock.hcl
+
 # Local .terraform directories
 **/.terraform/*
 

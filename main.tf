@@ -28,7 +28,7 @@ resource "aws_instance" "this" {
     cd /home/ec2-user
 
     # Export ECR variables
-    #!/bin/bash
+    echo "#!/bin/bash" >> exports.sh
     echo "export WEB_ECR="${aws_ecr_repository.web.repository_url}"" >> exports.sh
     echo "export SQL_ECR="${aws_ecr_repository.sql.repository_url}"" >> exports.sh
 
@@ -41,6 +41,8 @@ resource "aws_instance" "this" {
     echo 'aws ecr get-login-password --region us-east-1 | docker login -u AWS $WEB_ECR --password-stdin' >> exports.sh
     
     chmod +x exports.sh
+    
+    source exports.sh
   EOF
 
   tags = {
